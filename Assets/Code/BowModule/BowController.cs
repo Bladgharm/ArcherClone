@@ -47,7 +47,7 @@ namespace Assets.Code
         public void SetupArrow(float angle, float force)
         {
             var rotationVector = new Vector3(0, 0, angle);
-            _arrowTransform.rotation = Quaternion.Euler(rotationVector);
+            _bodyTransform.rotation = Quaternion.Euler(rotationVector);
             _force = _shootingForce * force;
 
         }
@@ -60,6 +60,8 @@ namespace Assets.Code
             arrowRigidbody.isKinematic = false;
 
             _cameraController.SetTarget(_arrowTransform);
+            var rotationVector = new Vector3(0, 0, 0);
+            _bodyTransform.rotation = Quaternion.Euler(rotationVector);
         }
     }
 }
