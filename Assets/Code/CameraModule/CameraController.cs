@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Core.Settings;
+using UnityEngine;
+using Zenject;
 
 public class CameraController : MonoBehaviour
 {
