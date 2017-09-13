@@ -54,6 +54,7 @@ namespace Assets.Code
 
         public void Shoot()
         {
+            _arrowTransform.SetParent(null);
             var arrowRigidbody = _arrowTransform.GetComponent<Rigidbody2D>();
             var velocity = _arrowTransform.right * _force;
             arrowRigidbody.velocity = velocity;
