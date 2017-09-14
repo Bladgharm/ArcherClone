@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using DebugModule;
 using UnityEngine;
 
 public class BowInputController : MonoBehaviour
@@ -6,13 +7,13 @@ public class BowInputController : MonoBehaviour
     [SerializeField]
     private float _force = 0f;
     [SerializeField]
-    private float _maxForce = 10f;
-    [SerializeField]
     private float _shootingAngle = 0f;
     [SerializeField]
     private float _maxForceRadius = 0f;
     [SerializeField]
     private Transform _bowTransform;
+
+    private DebugModule.DebugManagerSettings _settings = new DebugManagerSettings();
 
     [Header("Debug settings")]
     [SerializeField]

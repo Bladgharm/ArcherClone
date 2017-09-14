@@ -1,4 +1,5 @@
 ﻿using System;
+using CameraModule.Cameras;
 using UnityEngine;
 
 namespace Assets.Code

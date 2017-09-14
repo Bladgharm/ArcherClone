@@ -1,24 +1,29 @@
-﻿using Core.Settings;
+﻿using CameraModule.Interfaces;
 using UnityEngine;
-using Zenject;
 
-public class CameraController : MonoBehaviour
+namespace CameraModule.Cameras
 {
-    [SerializeField]
-    private Transform _targetTransform;
-
-    private void FixedUpdate()
+    public class CameraController : MonoBehaviour, IGameCamera
     {
-        if (_targetTransform == null)
+        [SerializeField]
+        private Transform _targetTransform;
+        [SerializeField]
+        private float _lerpSpeed = 0f;
+
+        private void FixedUpdate()
         {
-            return;
+            if (_targetTransform == null)
+            {
+                return;
+            }
+            var targetPosition = new Vector3(_targetTransform.position.x, transform.position.y, transform.position.z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, _lerpSpeed);
         }
-        var targetPosition = new Vector3(_targetTransform.position.x, transform.position.y, transform.position.z);
-        transform.position = targetPosition;
-    }
 
-    public void SetTarget(Transform newTarget)
-    {
-        _targetTransform = newTarget;
+        public void SetTarget(Transform newTarget)
+        {
+            _targetTransform = newTarget;
+        }
     }
 }
+

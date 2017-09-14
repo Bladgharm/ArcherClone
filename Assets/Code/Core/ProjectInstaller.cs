@@ -20,7 +20,7 @@ namespace Core
 
             Container.Bind<GlobalProjectSettings>().FromResource(ProjectSettingsPath).AsSingle();
 
-            //if (projectSettings.UseParam1)
+            //if (projectSettings.ProjectOrientation3D)
             //{
             //    Debug.Log("Bind with param 1");
             //}
