@@ -20,6 +20,8 @@ namespace DebugModule
                     layer = "Default";
                 }
 
+                message = ApplyColor(message.ToString(), _settings.GetLayerTextColor(layer));
+
                 if (_settings.IsShowLayer(layer))
                 {
                     switch (messageType)
@@ -62,6 +64,8 @@ namespace DebugModule
                     layer = "Default";
                 }
 
+                message = ApplyColor(message.ToString(), _settings.GetLayerTextColor(layer));
+
                 if (_settings.IsShowLayer(layer))
                 {
                     switch (messageType)
@@ -91,9 +95,14 @@ namespace DebugModule
             }
         }
 
-        public static string ApplyColor(string message, UnityEngine.Color color)
+        public string ApplyColor(string message, UnityEngine.Color color)
         {
-            return string.Format("<color={0}>{1}</color>", color.ToString(), message);
+            return string.Format("<color={0}>{1}</color>", "#"+UnityEngine.ColorUtility.ToHtmlStringRGB(color), message);
+        }
+
+        public string ColorToHex(UnityEngine.Color color)
+        {
+            return "#" + color.r.ToString("x2") + color.g.ToString("x2") + color.b.ToString("x2") + color.a.ToString("x2");
         }
 
         public void Initialize()
