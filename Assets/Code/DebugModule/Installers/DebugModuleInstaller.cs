@@ -1,9 +1,14 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
 
 namespace DebugModule.Installers
 {
-    public class DebugModuleInstaller : MonoInstaller<bool, DebugModuleInstaller>
+    public class DebugModuleInstaller : Installer<DebugModuleInstaller>
     {
-        private bool _debugsEnabled;
+        public override void InstallBindings()
+        {
+            Debug.Log("Debug manager install");
+            Container.Bind<IInitializable>().To<DebugManager>().AsSingle();
+        }
     }
 }

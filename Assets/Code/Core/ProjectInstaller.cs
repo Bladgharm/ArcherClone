@@ -1,4 +1,5 @@
 using Core.Settings;
+using DebugModule.Installers;
 using UnityEngine;
 using Zenject;
 
@@ -20,10 +21,10 @@ namespace Core
 
             Container.Bind<GlobalProjectSettings>().FromResource(ProjectSettingsPath).AsSingle();
 
-            //if (projectSettings.ProjectOrientation3D)
-            //{
-            //    Debug.Log("Bind with param 1");
-            //}
+            if (projectSettings.EnableLogs)
+            {
+                DebugModuleInstaller.Install(Container);
+            }
         }
     }
 }

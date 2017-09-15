@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using Zenject;
 
 namespace DebugModule
 {
-    public class DebugManager
+    public class DebugManager : IInitializable
     {
         private DebugManagerSettings _settings;
 
@@ -12,32 +10,41 @@ namespace DebugModule
         {
             if (_settings != null)
             {
+                if (string.IsNullOrEmpty(layer))
+                {
+                    layer = "Default";
+                }
+
                 if (_settings.IsShowLayer(layer))
                 {
                     switch (messageType)
                     {
                         case UnityEditor.MessageType.None:
-                            {
-                                UnityEngine.Debug.Log(message);
-                            }
+                        {
+                            UnityEngine.Debug.Log(message);
+                        }
                             break;
                         case UnityEditor.MessageType.Info:
-                            {
-                                UnityEngine.Debug.Log(message);
-                            }
+                        {
+                            UnityEngine.Debug.Log(message);
+                        }
                             break;
                         case UnityEditor.MessageType.Warning:
-                            {
-                                UnityEngine.Debug.LogWarning(message);
-                            }
+                        {
+                            UnityEngine.Debug.LogWarning(message);
+                        }
                             break;
                         case UnityEditor.MessageType.Error:
-                            {
-                                UnityEngine.Debug.LogError(message);
-                            }
+                        {
+                            UnityEngine.Debug.LogError(message);
+                        }
                             break;
                     }
                 }
+            }
+            else
+            {
+                UnityEngine.Debug.Log("Debug settings is not loaded");
             }
         }
 
@@ -78,81 +85,11 @@ namespace DebugModule
                 }
             }
         }
-    }
 
-    [System.Serializable]
-    public class DebugManagerSettingsParameter
-    {
-        public string LayerName;
-        public bool Enabled;
-
-        public DebugManagerSettingsParameter(string layerName, bool isEnabled)
+        public void Initialize()
         {
-            LayerName = layerName;
-            Enabled = isEnabled;
-        }
-    }
-
-    [System.Serializable]
-    public class DebugManagerSettings
-    {
-        public List<DebugManagerSettingsParameter> DebugLayers = new List<DebugManagerSettingsParameter>
-                {
-                    new DebugManagerSettingsParameter("Default", true)
-                };
-
-        public DebugManagerSettings()
-        {
-            if (DebugLayers == null)
-            {
-                DebugLayers = new List<DebugManagerSettingsParameter>
-                {
-                    new DebugManagerSettingsParameter("Default", true)
-                };
-            }
-
-            SaveSettings();
-        }
-
-        public bool IsShowLayer(string layerName)
-        {
-            return DebugLayers != null && DebugLayers.Any() && DebugLayers.First(l => l.LayerName == layerName).Enabled;
-        }
-
-        public void AddNewLayer(string layerName)
-        {
-            if (DebugLayers == null)
-            {
-                DebugLayers = new List<DebugManagerSettingsParameter>
-                {
-                    new DebugManagerSettingsParameter("Default", true)
-                };
-            }
-
-            if (DebugLayers.Exists(l => l.LayerName == layerName))
-            {
-                return;
-            }
-
-            DebugLayers.Add(new DebugManagerSettingsParameter(layerName, true));
-        }
-
-        public void RemoveLayer(string layerName)
-        {
-            if (DebugLayers.Exists(l => l.LayerName == layerName))
-            {
-                DebugLayers.Remove(DebugLayers.First(l => l.LayerName == layerName));
-            }
-        }
-
-        public void SaveSettings()
-        {
-            
-        }
-
-        public void LoadSettings()
-        {
-            
+            UnityEngine.Debug.Log("Init");
+            _settings = new DebugManagerSettings();
         }
     }
 }

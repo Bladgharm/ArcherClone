@@ -1,6 +1,7 @@
 ﻿using Assets.Code;
 using DebugModule;
 using UnityEngine;
+using Zenject;
 
 public class BowInputController : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class BowInputController : MonoBehaviour
     [SerializeField]
     private Transform _bowTransform;
 
-    private DebugModule.DebugManagerSettings _settings = new DebugManagerSettings();
-
     [Header("Debug settings")]
     [SerializeField]
     private bool _drawGizmos = true;
@@ -26,9 +25,16 @@ public class BowInputController : MonoBehaviour
 
     private BowController _bowController;
 
+    [Inject]
+    private DebugManager _debugManager;
+
     private void Start()
     {
         _bowController = GetComponent<BowController>();
+        if (_debugManager != null)
+        {
+            _debugManager.Log("test");
+        }
     }
 
     private void Update()
