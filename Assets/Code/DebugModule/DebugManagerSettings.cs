@@ -10,7 +10,7 @@ namespace DebugModule
     {
         public List<DebugManagerSettingsParameter> DebugLayers = new List<DebugManagerSettingsParameter>
         {
-            new DebugManagerSettingsParameter("Default", true)
+            new DebugManagerSettingsParameter("Default", true, Color.black)
         };
 
         public DebugManagerSettings()
@@ -19,7 +19,7 @@ namespace DebugModule
             {
                 DebugLayers = new List<DebugManagerSettingsParameter>
                 {
-                    new DebugManagerSettingsParameter("Default", true)
+                    new DebugManagerSettingsParameter("Default", true, Color.black)
                 };
             }
 
@@ -28,7 +28,16 @@ namespace DebugModule
 
         public bool IsShowLayer(string layerName)
         {
-            return DebugLayers != null && DebugLayers.Any() && DebugLayers.First(l => l.LayerName == layerName).Enabled;
+            return DebugLayers != null && DebugLayers.Any() && DebugLayers.Exists(l => l.LayerName == layerName) && DebugLayers.First(l => l.LayerName == layerName).Enabled;
+        }
+
+        public Color GetLayerTextColor(string layerName)
+        {
+            if (DebugLayers != null && DebugLayers.Any() && DebugLayers.Exists(l => l.LayerName == layerName))
+            {
+                return DebugLayers.First(l => l.LayerName == layerName).Color;
+            }
+            return Color.black;
         }
 
         public void AddNewLayer(string layerName)
@@ -37,7 +46,7 @@ namespace DebugModule
             {
                 DebugLayers = new List<DebugManagerSettingsParameter>
                 {
-                    new DebugManagerSettingsParameter("Default", true)
+                    new DebugManagerSettingsParameter("Default", true, Color.black)
                 };
             }
 
@@ -46,7 +55,7 @@ namespace DebugModule
                 return;
             }
 
-            DebugLayers.Add(new DebugManagerSettingsParameter(layerName, true));
+            DebugLayers.Add(new DebugManagerSettingsParameter(layerName, true, Color.black));
         }
 
         public void RemoveLayer(string layerName)

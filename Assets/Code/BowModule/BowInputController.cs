@@ -17,6 +17,8 @@ public class BowInputController : MonoBehaviour
     [Header("Debug settings")]
     [SerializeField]
     private bool _drawGizmos = true;
+    [Inject]
+    private DebugManager _debugManager;
 
     private Vector2 _startPoint;
     private Vector2 _endPoint;
@@ -25,16 +27,11 @@ public class BowInputController : MonoBehaviour
 
     private BowController _bowController;
 
-    [Inject]
-    private DebugManager _debugManager;
-
     private void Start()
     {
         _bowController = GetComponent<BowController>();
-        if (_debugManager != null)
-        {
-            _debugManager.Log("test");
-        }
+        _debugManager.Log("Bow input start", layer:"Default");
+        _debugManager.Log("Bow input start 1", layer: "High");
     }
 
     private void Update()

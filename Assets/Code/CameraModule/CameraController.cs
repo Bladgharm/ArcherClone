@@ -1,5 +1,7 @@
 ﻿using CameraModule.Interfaces;
+using DebugModule;
 using UnityEngine;
+using Zenject;
 
 namespace CameraModule.Cameras
 {
@@ -9,6 +11,17 @@ namespace CameraModule.Cameras
         private Transform _targetTransform;
         [SerializeField]
         private float _lerpSpeed = 0f;
+
+        [Inject]
+        private DebugManager _debugManager;
+
+        private void Start()
+        {
+            if (_debugManager != null)
+            {
+                _debugManager.Log("test");
+            }
+        }
 
         private void FixedUpdate()
         {

@@ -6,6 +6,11 @@ namespace DebugModule
     {
         private DebugManagerSettings _settings;
 
+        //public DebugManager(bool enableLogs)
+        //{
+        //    UnityEngine.Debug.Log("Debug manager: "+enableLogs);
+        //}
+
         public void Log(object message, UnityEditor.MessageType messageType = UnityEditor.MessageType.Info, string layer = null)
         {
             if (_settings != null)
@@ -86,9 +91,13 @@ namespace DebugModule
             }
         }
 
+        public static string ApplyColor(string message, UnityEngine.Color color)
+        {
+            return string.Format("<color={0}>{1}</color>", color.ToString(), message);
+        }
+
         public void Initialize()
         {
-            UnityEngine.Debug.Log("Init");
             _settings = new DebugManagerSettings();
         }
     }

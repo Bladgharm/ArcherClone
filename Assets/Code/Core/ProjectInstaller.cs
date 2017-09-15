@@ -21,10 +21,7 @@ namespace Core
 
             Container.Bind<GlobalProjectSettings>().FromResource(ProjectSettingsPath).AsSingle();
 
-            if (projectSettings.EnableLogs)
-            {
-                DebugModuleInstaller.Install(Container);
-            }
+            DebugModuleInstaller.Install(Container, projectSettings.EnableLogs);
         }
     }
 }
