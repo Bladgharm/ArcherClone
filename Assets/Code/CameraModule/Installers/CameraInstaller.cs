@@ -11,7 +11,7 @@ namespace CameraModule.Installers
 
         public override void InstallBindings()
         {
-            Container.Bind<IGameCamera>().To<Cameras.CameraController>().AsSingle();
+            Container.BindInterfacesTo<Cameras.CameraManager>().AsSingle().WithArguments(_projectSettings.CameraLerpSpeed);
         }
     }
 }

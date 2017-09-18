@@ -1,3 +1,4 @@
+using Assets.Code;
 using Core.Settings;
 using DebugModule.Installers;
 using UnityEngine;
@@ -17,11 +18,15 @@ namespace Core
                 return;
             }
 
+            //Project settings
             var projectSettings = Resources.Load<GlobalProjectSettings>(ProjectSettingsPath);
-
             Container.Bind<GlobalProjectSettings>().FromResource(ProjectSettingsPath).AsSingle();
 
+            //Debug module
             DebugModuleInstaller.Install(Container, projectSettings.EnableLogs);
+
+            //Game manager
+            Container.BindInterfacesAndSelfTo<GameManager>().AsSingle().NonLazy();
         }
     }
 }

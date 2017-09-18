@@ -30,8 +30,6 @@ public class BowInputController : MonoBehaviour
     private void Start()
     {
         _bowController = GetComponent<BowController>();
-        _debugManager.Log("Bow input start", layer:"Default");
-        _debugManager.Log("Bow input start 1", layer: "High");
     }
 
     private void Update()

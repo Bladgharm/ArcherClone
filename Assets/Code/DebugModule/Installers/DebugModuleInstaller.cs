@@ -14,7 +14,7 @@ namespace DebugModule.Installers
         public override void InstallBindings()
         {
             Container.Bind<DebugManager>().AsSingle();
-            Container.Bind<IInitializable>().To<DebugManager>().AsSingle();
+            Container.BindInstance(_enableLogs).WhenInjectedInto<DebugManager>();
         }
     }
 }

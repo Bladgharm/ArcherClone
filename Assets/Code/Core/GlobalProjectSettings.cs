@@ -6,5 +6,8 @@ namespace Core.Settings
     {
         public bool ProjectOrientation3D = false;
         public bool EnableLogs = true;
+
+        [Header("CameraSettings")]
+        public float CameraLerpSpeed = 10f;
     }
 }

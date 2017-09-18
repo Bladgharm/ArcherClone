@@ -19,12 +19,12 @@ namespace Assets.Code
 
         private float _force = 0f;
 
-        private CameraController _cameraController;
+        private CameraManager _cameraManager;
 
         private void Start()
         {
-            _cameraController = GetComponent<CameraController>();
-            _cameraController.SetTarget(_bodyTransform);
+            //_cameraManager = GetComponent<CameraManager>();
+            //_cameraManager.SetTarget(_bodyTransform);
         }
 
         public void CreateArrow()
@@ -41,8 +41,7 @@ namespace Assets.Code
 
         private void OnArrowHit()
         {
-            Debug.Log("Hit");
-            _cameraController.SetTarget(_bodyTransform);
+            _cameraManager.SetTarget(_bodyTransform);
         }
 
         public void SetupArrow(float angle, float force)
@@ -61,7 +60,7 @@ namespace Assets.Code
             arrowRigidbody.velocity = velocity;
             arrowRigidbody.isKinematic = false;
 
-            _cameraController.SetTarget(_arrowTransform);
+            _cameraManager.SetTarget(_arrowTransform);
             var rotationVector = new Vector3(0, 0, 0);
             _bodyTransform.rotation = Quaternion.Euler(rotationVector);
         }

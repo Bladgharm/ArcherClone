@@ -2,14 +2,16 @@
 
 namespace DebugModule
 {
-    public class DebugManager : IInitializable
+    public class DebugManager
     {
         private DebugManagerSettings _settings;
+        private bool _logsEnabled;
 
-        //public DebugManager(bool enableLogs)
-        //{
-        //    UnityEngine.Debug.Log("Debug manager: "+enableLogs);
-        //}
+        public DebugManager(bool enableLogs)
+        {
+            _logsEnabled = enableLogs;
+            _settings = new DebugManagerSettings();
+        }
 
         public void Log(object message, UnityEditor.MessageType messageType = UnityEditor.MessageType.Info, string layer = null)
         {
@@ -103,11 +105,6 @@ namespace DebugModule
         public string ColorToHex(UnityEngine.Color color)
         {
             return "#" + color.r.ToString("x2") + color.g.ToString("x2") + color.b.ToString("x2") + color.a.ToString("x2");
-        }
-
-        public void Initialize()
-        {
-            _settings = new DebugManagerSettings();
         }
     }
 }
