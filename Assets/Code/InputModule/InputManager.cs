@@ -27,19 +27,17 @@ namespace Assets.Code.InputModule
                 return;
             }
 
-            if (!EventSystem.current.IsPointerOverGameObject(0))
+            if (!EventSystem.current.IsPointerOverGameObject(0) && Input.touchCount > 0)
             {
-                var touch = Input.GetTouch(0);
-
-                if (touch.phase == TouchPhase.Began)
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
 
                 }
-                else if (touch.phase == TouchPhase.Moved)
+                else if (Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
 
                 }
-                else if (touch.phase == TouchPhase.Ended)
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
 
                 }

@@ -13,7 +13,7 @@ namespace DebugModule
             new DebugManagerSettingsParameter("Default", true, Color.black)
         };
 
-        public DebugManagerSettings()
+        public DebugManagerSettings(bool enableLogs = true)
         {
             if (DebugLayers == null)
             {
@@ -24,6 +24,8 @@ namespace DebugModule
             }
 
             LoadSettings();
+
+            SetLogsEnableState(enableLogs);
         }
 
         public bool IsShowLayer(string layerName)
@@ -94,6 +96,17 @@ namespace DebugModule
                 settingsAsset = CreateSettingsAsset();
                 settingsAsset.DebugLayers = DebugLayers;
                 AssetDatabase.SaveAssets();
+            }
+        }
+
+        private void SetLogsEnableState(bool enabled)
+        {
+            if (DebugLayers != null && DebugLayers.Any())
+            {
+                foreach (var debugManagerSettingsParameter in DebugLayers)
+                {
+                    debugManagerSettingsParameter.Enabled = enabled;
+                }
             }
         }
 

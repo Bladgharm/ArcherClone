@@ -10,7 +10,7 @@ namespace DebugModule
         public DebugManager(bool enableLogs)
         {
             _logsEnabled = enableLogs;
-            _settings = new DebugManagerSettings();
+            _settings = new DebugManagerSettings(_logsEnabled);
         }
 
         public void Log(object message, UnityEditor.MessageType messageType = UnityEditor.MessageType.Info, string layer = null)
